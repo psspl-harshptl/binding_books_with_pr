@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Scene 06: Contact Section Style
+   ========================================================================== */
+
+#contact {
+  color: var(--text-dark-2);
+
+  .contact-card {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    padding: 4.5rem;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      padding: 2rem 1.25rem;
+    }
+
+    .contact-glow {
+      position: absolute;
+      bottom: -20%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(235, 128, 160, 0.25) 0%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+  }
+
+  .contact-details {
+    z-index: 1;
+
+    .contact-title {
+      font-size: 2.8rem;
+      line-height: 1.2;
+      color: var(--text-dark-1) !important;
+      margin: 1rem 0 1.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 2.2rem;
+      }
+    }
+
+    p {
+      color: var(--text-dark-2) !important;
+      font-size: 1.05rem;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 550px;
+
+      @media (max-width: 768px) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .contact-method {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(235, 128, 160, 0.25);
+    border-radius: 12px;
+    cursor: pointer;
+
+    .method-icon {
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .method-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dark-3);
+    }
+
+    .method-val {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark-1) !important;
+      margin-top: 0.2rem;
+      word-break: break-all;
+
+      &:hover {
+        color: var(--accent-crimson) !important;
+      }
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.75);
+      border-color: rgba(235, 128, 160, 0.45);
+    }
+  }
+
+  .contact-actions {
+    display: flex;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 1rem;
+
+      .secondary-cta {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .contact-visual-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 200px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .closing-book-placeholder {
+      width: 150px;
+      height: 200px;
+      position: relative;
+
+      .glowing-orb {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba(199, 141, 146, 0.45) 0%, rgba(110, 26, 36, 0.15) 50%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulseOrb 3s infinite ease-in-out;
+      }
+    }
+  }
+}
+
+@keyframes pulseOrb {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+    filter: blur(10px);
+  }
+}

@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Custom Fluid Cursor
+   ========================================================================== */
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-crimson);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+#custom-cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent-rosegold);
+  opacity: 0.5;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out, width 0.3s ease, height 0.3s ease, opacity 0.3s;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+body.cursor-hover {
+  #custom-cursor {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(199, 141, 146, 0.15);
+    border: 1px solid var(--accent-rosegold);
+  }
+
+  #custom-cursor-glow {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+  }
+}

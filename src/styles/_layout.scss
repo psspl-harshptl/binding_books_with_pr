@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.services-content-col,
+.pathways-content-col,
+.testimonials-content-col {
+  .section-header {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .section-desc {
+      margin-left: 0;
+      max-width: 600px;
+    }
+  }
+}
+
+.scene-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0;
+  overflow: hidden;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+    min-height: auto;
+  }
+}
+
+/* Section Header Styles */
+.section-header {
+  margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-tagline {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--accent-crimson);
+    padding-left: 0;
+    border-left: 2px solid transparent;
+    transition: border-color 0.6s ease 0.2s, padding-left 0.5s ease 0.2s;
+
+    &.tagline-revealed {
+      border-color: var(--accent-crimson);
+      padding-left: 1rem;
+    }
+  }
+
+  .section-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark-1);
+
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+  }
+
+  .section-desc {
+    font-size: 1.1rem;
+    color: var(--text-dark-2);
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  .max-width-600 {
+    max-width: 600px;
+  }
+
+  &.center-align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ==========================================================================
+   Premium Glassmorphism Panels
+   ========================================================================== */
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: var(--transition-smooth);
+
+  &:hover {
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}

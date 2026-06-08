@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Scene 01: Hero Section Style - Split Layout
+   ========================================================================== */
+
+#hero {
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 90vh;
+    padding-top: 6rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      padding-top: 5rem;
+      min-height: auto;
+    }
+  }
+
+  .hero-text-content {
+    max-width: 100%;
+    z-index: 2;
+    position: relative;
+  }
+
+  .hero-title {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
+    color: var(--text-dark-1);
+
+    @media (max-width: 768px) {
+      font-size: 3rem;
+    }
+
+    .gold-gradient {
+      background: linear-gradient(135deg, var(--text-dark-1) 0%, var(--accent-crimson) 50%, var(--text-dark-1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-dark-2);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    max-width: 550px;
+    line-height: 1.7;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      gap: 1rem;
+
+      .secondary-cta {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .scroll-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-crimson);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    .scroll-text {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-dark-3);
+    }
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(110, 26, 36, 0.08);
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+
+      .stat-number {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--accent-crimson);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .stat-label {
+        font-size: 0.78rem;
+        color: var(--text-dark-3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      gap: 1.5rem;
+    }
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(2);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateRing {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

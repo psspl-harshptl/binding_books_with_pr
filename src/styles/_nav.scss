@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Header Navigation Style
+   ========================================================================== */
+
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(255, 234, 240, 0.95) 0%, transparent 100%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(235, 128, 160, 0.08);
+
+  @media (max-width: 1024px) {
+    padding: 1.2rem 2rem;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-dark-1);
+
+    .gold-text {
+      color: var(--accent-crimson);
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-dark-2);
+    position: relative;
+    padding: 0.5rem 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent-crimson);
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--accent-crimson);
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &.active-link {
+      color: var(--accent-crimson);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .header-cta {
+    padding: 0.6rem 1.6rem;
+    font-size: 0.85rem;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: 1024px) {
+      display: flex;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-dark-1);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+  }
+}
+
+/* Mobile Nav Drawer styling */
+.nav-links-mobile-active {
+  display: flex !important;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #faf8f5 0%, #f5f0e6 20%, #ede6d6 45%, #e6ddc8 70%, #ded4b9 90%, #d4c9aa 100%);
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: 99;
+
+  .nav-link {
+    font-size: 1.5rem;
+  }
+}
+
+.mobile-toggle-active {
+  span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  span:nth-child(2) {
+    opacity: 0;
+  }
+
+  span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

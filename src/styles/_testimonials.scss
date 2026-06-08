@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Scene 05: Testimonials Section Style
+   ========================================================================== */
+
+#testimonials {
+  padding: 5rem 0;
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  .section-header {
+    overflow: hidden;
+  }
+
+  .testimonials-space-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1.15fr 1.85fr;
+    gap: 4rem;
+    align-items: start;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .testimonials-content-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .testimonials-book-space {
+    display: block;
+    height: 1px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .testimonials-cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    position: relative;
+    width: 100%;
+    height: 72vh; // Fixed viewport window so cards scroll through it
+    overflow: hidden;
+
+    padding: 2rem 0.5rem;
+
+    mask-image: linear-gradient(to bottom,
+        transparent,
+        black 6%,
+        black 94%,
+        transparent);
+
+    -webkit-mask-image: linear-gradient(to bottom,
+        transparent,
+        black 6%,
+        black 94%,
+        transparent);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      height: 55vh;
+      overflow: visible;
+    }
+  }
+
+  .testimonials-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    width: 100%;
+    will-change: transform;
+
+    @media (max-width: 1024px) {
+      gap: 1.5rem;
+    }
+  }
+
+  .testimonials-col-right {
+    position: relative;
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
+  }
+
+  .testimonial-card {
+    padding: 1.8rem 1.6rem; // Reduced padding to prevent vertical overflow
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 380px; // Increased height to comfortably fit all content symmetrically
+    background: #fff !important;
+    border: 1px solid rgba(168, 61, 90, 0.12);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1.25rem;
+      height: auto; // Auto height on mobile to prevent text layout issues
+    }
+
+    cursor: pointer;
+
+    .star-rating {
+      color: var(--accent-rosegold);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-quote {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-dark-1);
+      /* Increased contrast (Walnut Midnight) */
+      line-height: 1.5;
+      font-weight: 400;
+      /* Thicker font weight for better readability */
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .author-avatar {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-crimson) 0%, var(--accent-rosegold) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-serif);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+      }
+
+      .author-info {
+        display: flex;
+        flex-direction: column;
+
+        strong {
+          color: var(--text-dark-1);
+          font-size: 1rem;
+        }
+
+        span {
+          color: var(--text-dark-3);
+          font-size: 0.85rem;
+          margin-top: 0.2rem;
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--accent-crimson);
+      box-shadow: 0 10px 40px rgba(110, 26, 36, 0.08);
+    }
+  }
+}

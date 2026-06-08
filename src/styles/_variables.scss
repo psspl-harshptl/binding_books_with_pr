@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Design System & Premium Crimson & Pearl Rose CSS Variables
+   ========================================================================== */
+
+:root {
+  --bg-light-1: #faf8f5;
+  /* Premium Warm Alabaster cream */
+  --bg-light-2: rgba(255, 255, 255, 0.78);
+  /* Translucent Alabaster Glass */
+  --bg-light-3: #121826;
+  /* Brand Midnight Navy for footer */
+
+  --accent-crimson: #a83d5a;
+  /* Muted Elegant Cranberry Rose (Sophisticated light mode accent) */
+  --accent-rosegold: #d6b3bd;
+  /* Soft Rose Gold */
+  --accent-pearlrose: #c2c3f3;
+  /* Soft Lavender Blue glow accent */
+  --accent-gold: #cfa87b;
+  /* Warm Champagne Gold */
+
+  --text-dark-1: #1f1b18;
+  /* Midnight Walnut / Dark Umber for high-contrast headers */
+  --text-dark-2: #4a423b;
+  /* Deep Charcoal Slate for body text */
+  --text-dark-3: #756a60;
+  /* Warm Muted Gray for small text */
+
+  --glow-color: rgba(168, 61, 90, 0.08);
+  /* Cranberry Rose glow */
+  --glow-color-bright: rgba(207, 168, 123, 0.08);
+  /* Champagne Gold glow */
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(168, 61, 90, 0.12);
+  /* Delicate warm borders */
+  --glass-border-hover: rgba(168, 61, 90, 0.28);
+
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}

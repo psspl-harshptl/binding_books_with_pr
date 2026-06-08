@@ -1,0 +1,21 @@
+/* ==========================================================================
+   WebGL Canvas
+   ========================================================================== */
+
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+/* Ambient glow backdrops - hidden; gradient handles background */
+.bg-glow,
+.bg-glow-1,
+.bg-glow-2 {
+  display: none;
+}

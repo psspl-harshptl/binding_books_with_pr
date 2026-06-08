@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Typography Utilities
+   ========================================================================== */
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+.gold-text {
+  color: var(--accent-crimson);
+  font-weight: 600;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, var(--text-dark-1) 0%, var(--accent-crimson) 60%, var(--text-dark-1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.white-text {
+  color: var(--text-dark-1);
+}
+
+.center-align {
+  text-align: center;
+}
