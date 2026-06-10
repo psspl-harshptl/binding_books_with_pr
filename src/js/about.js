@@ -22,9 +22,9 @@ export function initAboutSectionInteractions() {
     path.style.strokeDashoffset = `${pLen}px`;
   }
 
-  // Steps spread: step[0] at 0%, step[N-1] at 88% of totalScroll
-  // → only 12% (~210px) of dead scroll remains after last step appears
-  const SPREAD_END   = 0.88;
+  // Steps spread: step[0] at 0%, step[N-1] at 80% of totalScroll
+  // → 20% of dead scroll remains after last step appears (safeguards short laptops)
+  const SPREAD_END   = 0.80;
   const stepThresholds = Array.from(steps).map((_, i) =>
     steps.length > 1 ? (i / (steps.length - 1)) * SPREAD_END : 0
   );
@@ -35,10 +35,15 @@ export function initAboutSectionInteractions() {
     const scrolledIn = -rect.top; // px scrolled past top of #about
 
     if (scrolledIn < 0) {
-      // User hasn't reached the section yet → ensure all steps are hidden
-      steps.forEach(s => {
-        s.style.opacity   = '0';
-        s.style.transform = 'translateY(45px)';
+      // User hasn't reached the section yet → ensure step 0 is visible, others hidden
+      steps.forEach((step, i) => {
+        if (i === 0) {
+          step.style.opacity   = '1';
+          step.style.transform = 'translateY(0)';
+        } else {
+          step.style.opacity   = '0';
+          step.style.transform = 'translateY(45px)';
+        }
       });
       if (path) path.style.strokeDashoffset = `${pLen}px`;
       return;
@@ -51,17 +56,27 @@ export function initAboutSectionInteractions() {
       path.style.strokeDashoffset = `${pLen * (1 - progress)}px`;
     }
 
-    // Reveal each step once its threshold is crossed
+    // Reveal each step once its threshold is crossed, and hide it when scrolling back up
     steps.forEach((step, i) => {
+      if (i === 0) {
+        step.style.opacity   = '1';
+        step.style.transform = 'translateY(0)';
+        return;
+      }
+
       if (progress >= stepThresholds[i]) {
-        // Snap in with a CSS transition (only applied once, on reveal)
         if (step.style.opacity !== '1') {
-          step.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+          step.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
           step.style.opacity    = '1';
           step.style.transform  = 'translateY(0)';
         }
+      } else {
+        if (step.style.opacity !== '0') {
+          step.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+          step.style.opacity    = '0';
+          step.style.transform  = 'translateY(45px)';
+        }
       }
-      // Once revealed, stays revealed (no reverse — mimics once:true)
     });
 
     // Active-step highlight: whichever step's threshold we just crossed

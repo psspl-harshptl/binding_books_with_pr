@@ -9,6 +9,10 @@
     padding: 4rem 0;
   }
 
+  @media (max-width: 1400px) and (min-width: 769px) {
+    padding: 5rem 0 1.5rem 0;
+  }
+
   .section-header {
     overflow: hidden;
   }
@@ -16,7 +20,7 @@
   .testimonials-space-wrapper {
     position: relative;
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: 1.15fr 1.85fr;
     gap: 4rem;
@@ -29,6 +33,11 @@
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 1400px) and (min-width: 769px) {
+      margin-top: 0.5rem;
+      gap: 2rem;
     }
   }
 
@@ -53,7 +62,7 @@
     gap: 2.5rem;
     position: relative;
     width: 100%;
-    height: 72vh; // Fixed viewport window so cards scroll through it
+    height: 82vh; // Fixed viewport window so cards scroll through it
     overflow: hidden;
 
     padding: 2rem 0.5rem;
@@ -75,6 +84,10 @@
       height: 55vh;
       overflow: visible;
     }
+
+    @media (max-width: 1400px) and (min-width: 769px) {
+      height: 78vh;
+    }
   }
 
   .testimonials-col {
@@ -86,6 +99,10 @@
 
     @media (max-width: 1024px) {
       gap: 1.5rem;
+    }
+
+    @media (max-width: 1400px) and (min-width: 769px) {
+      gap: 1.25rem;
     }
   }
 
@@ -116,6 +133,11 @@
       height: auto; // Auto height on mobile to prevent text layout issues
     }
 
+    @media (max-width: 1400px) and (min-width: 769px) {
+      height: 260px;
+      padding: 1rem 1.25rem;
+    }
+
     cursor: pointer;
 
     .star-rating {
@@ -123,6 +145,11 @@
       font-size: 1.1rem;
       letter-spacing: 2px;
       margin-bottom: 1rem;
+
+      @media (max-width: 1400px) and (min-width: 769px) {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
     }
 
     .testimonial-quote {
@@ -135,6 +162,12 @@
       /* Thicker font weight for better readability */
       margin-bottom: 1.2rem;
       flex-grow: 1;
+
+      @media (max-width: 1400px) and (min-width: 769px) {
+        font-size: 0.95rem;
+        line-height: 1.45;
+        margin-bottom: 0.8rem;
+      }
     }
 
     .testimonial-author {

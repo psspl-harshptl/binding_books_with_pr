@@ -620,47 +620,132 @@ export function initThreeScene() {
     });
 
     // Book 3D Coordinates & rotations
-    let bx = 0.0, by = 0.3, bz = 0.0;
+    let bx = 0.0, by = 0.0, bz = 0.0;
     let ry = 0.2;
 
     const wScale = Math.max(0.6, Math.min(window.innerWidth / 1440, 1.15));
     const isMobile = window.innerWidth <= 768;
 
+    // Helper to project screen pixel coordinates to Three.js coordinates at depth Z
+    const getThreeXFromPixel = (px, z = 0) => {
+      const visibleHeight = 2 * Math.tan(30 * Math.PI / 180) * (5.5 - z);
+      return (px - window.innerWidth / 2) * (visibleHeight / window.innerHeight);
+    };
+
+    // Closed book meshes are offset by -1.0 local, so closed book center at px requires pivot = targetX + 1.0
+    const getClosedBookX = (px) => {
+      return getThreeXFromPixel(px, 0) + 1.0;
+    };
+
+    // 1. Hero X position (center in the space to the right of the text content)
+    let heroX = 2.6 * wScale;
+    if (!isMobile) {
+      const heroText = document.querySelector('.hero-text-content');
+      if (heroText) {
+        const rect = heroText.getBoundingClientRect();
+        const targetPx = rect.right + (window.innerWidth - rect.right) / 2;
+        heroX = getClosedBookX(targetPx);
+      }
+    }
+
+    // 2. Services X position (center in the spacer column)
+    let servicesX = -2.6 * wScale;
+    if (!isMobile) {
+      const servicesSpace = document.querySelector('.services-book-space');
+      if (servicesSpace) {
+        const rect = servicesSpace.getBoundingClientRect();
+        const targetPx = rect.left + rect.width / 2;
+        servicesX = getThreeXFromPixel(targetPx, 0);
+      }
+    }
+
+    // 3. Communities X position (center in the spacer column)
+    let communitiesX = 2.6 * wScale;
+    if (!isMobile) {
+      const pathwaysSpace = document.querySelector('.pathways-book-space');
+      if (pathwaysSpace) {
+        const rect = pathwaysSpace.getBoundingClientRect();
+        const targetPx = rect.left + rect.width / 2;
+        communitiesX = getThreeXFromPixel(targetPx, 0);
+      }
+    }
+
+    // 4. Testimonials X position (center in the spacer column)
+    let testimonialsX = -2.6 * wScale;
+    if (!isMobile) {
+      const testimonialsSpace = document.querySelector('.testimonials-book-space');
+      if (testimonialsSpace) {
+        const rect = testimonialsSpace.getBoundingClientRect();
+        const targetPx = rect.left + rect.width / 2;
+        testimonialsX = getThreeXFromPixel(targetPx, 0);
+      }
+    }
+
+    // 5. Founder X & Y position (center inside the gold portal frame)
+    let founderX = 2.8 * wScale;
+    let founderY = 0.0;
+    if (!isMobile) {
+      const portal = document.querySelector('.portrait-gold-portal');
+      if (portal) {
+        const rect = portal.getBoundingClientRect();
+        const targetPxX = rect.left + rect.width / 2;
+        const targetPxY = rect.top + rect.height / 2;
+        founderX = getThreeXFromPixel(targetPxX, -1.5);
+        const visibleHeightAtFounder = 2 * Math.tan(30 * Math.PI / 180) * (5.5 - (-1.5));
+        founderY = -(targetPxY - window.innerHeight / 2) * (visibleHeightAtFounder / window.innerHeight);
+      }
+    }
+
+    // 6. Contact X & Y position (center inside the closing book placeholder)
+    let contactX = 2.6 * wScale;
+    let contactY = 0.3;
+    if (!isMobile) {
+      const contactSpace = document.querySelector('.closing-book-placeholder');
+      if (contactSpace) {
+        const rect = contactSpace.getBoundingClientRect();
+        const targetPxX = rect.left + rect.width / 2;
+        const targetPxY = rect.top + rect.height / 2;
+        contactX = getThreeXFromPixel(targetPxX, 0);
+        const visibleHeightAtContact = 2 * Math.tan(30 * Math.PI / 180) * 5.5;
+        contactY = -(targetPxY - window.innerHeight / 2) * (visibleHeightAtContact / window.innerHeight);
+      }
+    }
+
     // Define states for key sections
     const states = {
       hero: {
-        bx: isMobile ? 0.0 : 2.6 * wScale,
-        by: isMobile ? -0.5 : 0.3,
+        bx: isMobile ? 0.0 : heroX,
+        by: isMobile ? -0.5 : 0.0,
         bz: 0.0,
         ry: 0.2
       },
       services: {
-        bx: isMobile ? 0.0 : -2.6 * wScale,
-        by: isMobile ? 0.3 : 0.3,
+        bx: isMobile ? 0.0 : servicesX,
+        by: isMobile ? 0.3 : 0.0,
         bz: 0.0,
         ry: Math.PI * 0.8
       },
       communities: {
-        bx: isMobile ? 0.0 : 2.6 * wScale,
-        by: isMobile ? 0.3 : 0.3,
+        bx: isMobile ? 0.0 : communitiesX,
+        by: isMobile ? 0.3 : 0.0,
         bz: 0.0,
         ry: 0.2
       },
       testimonials: {
-        bx: isMobile ? 0.0 : -2.6 * wScale,
-        by: isMobile ? 0.3 : 0.3,
+        bx: isMobile ? 0.0 : testimonialsX,
+        by: isMobile ? 0.3 : 0.0,
         bz: 0.0,
         ry: Math.PI * 0.8
       },
       founder: {
-        bx: isMobile ? 0.0 : 2.8 * wScale,
-        by: 0.0,
+        bx: isMobile ? 0.0 : founderX,
+        by: isMobile ? 0.0 : founderY,
         bz: -1.5,
         ry: Math.PI * 0.35
       },
       contact: {
-        bx: isMobile ? 0.0 : 2.6 * wScale,
-        by: isMobile ? 0.3 : 0.3,
+        bx: isMobile ? 0.0 : contactX,
+        by: isMobile ? 0.3 : contactY,
         bz: 0.0,
         ry: 0.2
       }

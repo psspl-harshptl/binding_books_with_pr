@@ -30,10 +30,9 @@ export function initScrollTriggers() {
   }
 
   // Reveal Section Titles and Descriptions on scroll (from bottom to top)
-  // Skip the testimonials header — it gets a non-reversing reveal below
-  // so it stays visible during the pinned conveyor belt scroll.
+  // Skip the testimonials and about headers — they are animated inside their pinned timelines.
   document.querySelectorAll('.section-header').forEach(header => {
-    if (header.closest('#testimonials')) return;
+    if (header.closest('#testimonials') || header.closest('#about')) return;
     registerBottomToTopReveal(header, '88%', '12%', 100);
   });
 
@@ -90,6 +89,59 @@ export function initScrollTriggers() {
       }
     }
   );
+
+  // About section sticky header slide-up and steps container dynamic scroll to prevent vertical clipping
+  const aboutEl = document.getElementById('about');
+  const aboutHeader = document.querySelector('#about .section-header');
+  const stepsContainer = document.querySelector('#about .timeline-steps');
+
+  if (aboutEl && aboutHeader && stepsContainer) {
+    const getStepsOverflow = () => {
+      const container = document.querySelector('#about .about-container');
+      if (!container) return 0;
+      
+      const containerH = container.offsetHeight;
+      
+      // Calculate current transform Y of the steps container to compute baseline rects
+      const style = window.getComputedStyle(stepsContainer);
+      const matrix = new DOMMatrixReadOnly(style.transform);
+      const currentY = matrix.m42 || 0;
+      
+      const stepsRect = stepsContainer.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      
+      const stepsTopRelative = stepsRect.top - containerRect.top - currentY;
+      const stepsBottomRelative = stepsTopRelative + stepsContainer.offsetHeight;
+      
+      const paddingBottom = parseFloat(window.getComputedStyle(container).paddingBottom) || 24;
+      
+      // Compute overflow with extra safety spacing at the bottom of the viewport
+      const overflow = stepsBottomRelative - containerH + paddingBottom + 16;
+      return Math.max(0, overflow);
+    };
+
+    const aboutTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+        invalidateOnRefresh: true
+      }
+    });
+
+    aboutTl.to(aboutHeader, {
+      y: -150,
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power1.out'
+    }, 0)
+    .to(stepsContainer, {
+      y: () => -getStepsOverflow(),
+      duration: 1.0,
+      ease: 'none'
+    }, 0);
+  }
 
   // Service Cards staggered slide-up releases inside the grid
   gsap.fromTo('.service-card',
@@ -236,14 +288,9 @@ export function initScrollTriggers() {
   const rightCol = document.querySelector('.testimonials-col-right');
 
   if (container && leftCol && rightCol) {
-    // The container has a fixed CSS height (65vh), so only a portion of each
-    // column is visible at a time.  The "overflow" is how far beyond the
-    // visible window each column extends — that's exactly how far it needs
-    // to scroll so every card passes through the viewport.
-    const containerH = container.offsetHeight;
-    const leftOverflow = Math.max(0, leftCol.scrollHeight - containerH);
-    const rightOverflow = Math.max(0, rightCol.scrollHeight - containerH);
-    const maxOverflow = Math.max(leftOverflow, rightOverflow);
+    // Helper functions to dynamically calculate overflows on window resize
+    const getLeftOverflow = () => Math.max(0, leftCol.scrollHeight - container.offsetHeight);
+    const getRightOverflow = () => Math.max(0, rightCol.scrollHeight - container.offsetHeight);
 
     // Pin the section and scrub both columns in opposite directions.
     // Pin duration matches the content: just enough scroll for all cards.
@@ -251,10 +298,15 @@ export function initScrollTriggers() {
       scrollTrigger: {
         trigger: '#testimonials',
         start: 'top top',
-        end: () => `+=${maxOverflow + containerH * 0.85}`,
+        end: () => {
+          const containerH = container.offsetHeight;
+          const maxOverflow = Math.max(getLeftOverflow(), getRightOverflow());
+          return `+=${maxOverflow + containerH * 0.85}`;
+        },
         pin: true,
         scrub: 1,
         anticipatePin: 1,
+        invalidateOnRefresh: true, // Recalculate values dynamically on window resize
         onUpdate: () => {
           // Highlight the testimonial card closest to the container center
           const allCards = container.querySelectorAll('.testimonial-card');
@@ -292,36 +344,37 @@ export function initScrollTriggers() {
       }
     });
 
-    // Animate section header to fade out and collapse height, sliding cards up
-    tl.to('#testimonials .section-header', {
-      height: 0,
-      marginBottom: 0,
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.inOut'
-    }, 0.25);
+    // Scroll up the section header and slide up the cards container to fully cover the viewport
+    const header = document.querySelector('#testimonials .section-header');
+    if (header) {
+      tl.to(header, {
+        y: -160,
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power1.out'
+      }, 0);
+    }
 
-    // Expand the cards container height so reviews cover the entire screen height on scroll
     tl.to(container, {
-      height: '90vh',
-      duration: 0.5,
-      ease: 'power2.inOut'
-    }, 0.25);
+      y: -140,
+      duration: 0.3,
+      ease: 'power1.out'
+    }, 0);
 
     // Left column scrolls UPWARD: starts at natural position (first cards
-    // visible), ends shifted up so last cards are visible. Added start delay.
+    // visible), ends shifted up so last cards are visible.
     tl.fromTo(leftCol,
       { y: 0 },
-      { y: -leftOverflow, duration: 1.0, ease: 'none' },
-      0.25
+      { y: () => -getLeftOverflow(), duration: 1.0, ease: 'none' },
+      0
     );
 
     // Right column scrolls DOWNWARD (opposite): starts shifted up so last
-    // cards are visible, ends at natural position showing first cards. Added start delay.
+    // cards are visible, ends at natural position showing first cards.
     tl.fromTo(rightCol,
-      { y: -rightOverflow },
+      { y: () => -getRightOverflow() },
       { y: 0, duration: 1.0, ease: 'none' },
-      0.25
+      0
     );
   }
 

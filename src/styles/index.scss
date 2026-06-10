@@ -2,20 +2,21 @@
    Master Import Manifest
    ========================================================================== */
 
-@import 'variables';
-@import 'reset';
-@import 'typography';
-@import 'layout';
-@import 'webgl';
-@import 'cursor';
-@import 'buttons';
-@import 'loader';
-@import 'nav';
-@import 'hero';
-@import 'about';
-@import 'services';
-@import 'pathways';
-@import 'testimonials';
-@import 'contact';
-@import 'footer';
-@import 'animations';
+@use 'variables';
+@use 'reset';
+@use 'typography';
+@use 'layout';
+@use 'webgl';
+@use 'cursor';
+@use 'buttons';
+@use 'loader';
+@use 'nav';
+@use 'hero';
+@use 'about';
+@use 'services';
+@use 'pathways';
+@use 'testimonials';
+@use 'contact';
+@use 'footer';
+@use 'animations';
+
