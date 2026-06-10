@@ -11,6 +11,10 @@
   align-items: unset !important;
   overflow: visible;
 
+  @media (max-width: 768px) {
+    padding: 3rem 0 0 0 !important;
+  }
+
   .section-header {
     @media (max-width: 1400px) and (min-width: 769px) {
       margin-bottom: 1rem;
@@ -34,13 +38,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5rem 0; /* restore the section padding */
-    overflow: hidden; /* clip children that start off-screen */
+    padding: 5rem 0;
+    /* restore the section padding */
+    overflow: hidden;
+    /* clip children that start off-screen */
 
     @media (max-width: 768px) {
       height: auto;
       min-height: 100vh;
-      padding: 4rem 0;
+      padding: 3rem 1.5rem 1.5rem 1.5rem;
       position: relative;
     }
 
@@ -123,7 +129,8 @@
 
     .portrait-gold-portal {
       width: 100%;
-      height: 78%;
+      flex: 1;
+      min-height: 0;
       position: relative;
       background: transparent;
       display: flex;
@@ -222,7 +229,7 @@
     padding-right: 5rem;
 
     @media (max-width: 768px) {
-      padding-right: 3rem;
+      padding-right: 2.25rem;
       gap: 1.5rem;
     }
 
@@ -242,12 +249,13 @@
     z-index: 1;
 
     @media (max-width: 768px) {
-      right: 1.5rem;
+      right: 1.125rem;
     }
 
     @media (max-width: 1400px) and (min-width: 769px) {
       top: 1.5rem;
       bottom: 1.5rem;
+      right: 2.25rem;
     }
 
     .timeline-svg {
@@ -277,6 +285,7 @@
     will-change: opacity, transform;
 
     display: flex;
+    width: 100%;
     gap: 1.5rem;
     padding: 1.5rem 1.8rem;
     align-items: center;
@@ -292,6 +301,8 @@
 
     @media (max-width: 768px) {
       padding: 1.25rem;
+      opacity: 1;
+      transform: none;
     }
 
     @media (max-width: 1400px) and (min-width: 769px) {
@@ -317,15 +328,22 @@
       z-index: 2;
 
       @media (max-width: 768px) {
-        right: -3rem;
-        width: 3rem;
+        right: -2.25rem;
+        width: 2.25rem;
+      }
+
+      @media (max-width: 1400px) and (min-width: 769px) {
+        right: -4.5rem;
+        width: 4.5rem;
       }
 
       .step-num-node {
         position: absolute;
         width: 14px;
         height: 14px;
-        left: 22px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
         border-radius: 50%;
         background: #ffffff;
         border: 2px solid rgba(18, 24, 38, 0.15);
@@ -348,7 +366,7 @@
 
         @media (max-width: 768px) {
           font-size: 1.15rem;
-          right: -18px;
+          right: -14px;
         }
       }
     }
@@ -433,7 +451,7 @@
     }
 
     .section-header {
-      margin-bottom: 0.5rem;
+      margin-bottom: 2rem;
 
       .section-title {
         font-size: 1.6rem;
@@ -448,7 +466,7 @@
     }
 
     .about-timeline-grid {
-      margin-top: 0.5rem;
+      margin-top: 1.5rem;
       gap: 1.5rem;
     }
 
@@ -463,8 +481,6 @@
       border-radius: 16px;
 
       .portrait-gold-portal {
-        height: 72%;
-
         .portal-spotlight {
           width: 110px;
           height: 110px;
@@ -504,7 +520,9 @@
         .step-num-node {
           width: 10px;
           height: 10px;
-          left: 24px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
         }
 
         .step-num {
@@ -526,4 +544,3 @@
     }
   }
 }
-

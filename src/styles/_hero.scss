@@ -77,6 +77,15 @@
     align-items: center;
     gap: 1rem;
 
+    @media (max-width: 768px) {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+    }
+
     .scroll-dot {
       width: 6px;
       height: 6px;

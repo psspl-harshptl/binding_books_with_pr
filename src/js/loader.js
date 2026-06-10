@@ -22,6 +22,8 @@ export function initLoader() {
           loader.style.opacity = '0';
           setTimeout(() => {
             loader.style.display = 'none';
+            // Restore default body overflow to enable vertical scrolling
+            document.body.style.overflow = '';
             // Recalculate ScrollTrigger positions now that DOM layout is stable
             ScrollTrigger.refresh();
             // Start entrance animations
