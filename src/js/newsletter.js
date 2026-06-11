@@ -23,12 +23,17 @@ export function initNewsletter() {
         body: body.toString()
       });
 
-      if (response.ok) {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+      if (response.ok || (isLocal && (response.status === 404 || response.status === 405))) {
         status.style.color = '#2d7c43'; // Soft elegant green
         status.textContent = 'Thank you for subscribing! Welcome to our constellation. ✨';
         form.reset();
+        if (isLocal) {
+          console.info('Netlify Forms submission intercepted and mocked as success on localhost.');
+        }
       } else {
-        throw new Error('Network response not ok');
+        throw new Error(`Network response not ok: ${response.status}`);
       }
     } catch (err) {
       status.style.color = '#c44747'; // Crimson red

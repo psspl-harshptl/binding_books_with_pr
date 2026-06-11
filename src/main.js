@@ -28,7 +28,18 @@ window.addEventListener('DOMContentLoaded', () => {
   initNewsletter();
 
   // Initialize WebGL subsystem
-  state.webglInstance = initThreeScene();
+  try {
+    state.webglInstance = initThreeScene();
+  } catch (error) {
+    console.error('WebGL initialization failed. Running website in 2D fallback mode:', error);
+    state.webglInstance = null;
+    
+    // Hide WebGL canvas to prevent visual blocking
+    const canvas = document.getElementById('webgl-canvas');
+    if (canvas) {
+      canvas.style.display = 'none';
+    }
+  }
 
   // Set up loader, which triggers intros and un-locks 3D animation
   initLoader();

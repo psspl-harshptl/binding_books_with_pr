@@ -706,50 +706,40 @@
           <div class="contact-glow"></div>
 
           <div class="contact-details">
-            <!-- Left Column: Info, Campaign CTA & Signature -->
-            <div class="contact-info-block">
-              <span class="section-tagline gold-text">Get in Touch</span>
-              <h2 class="font-serif contact-title">Let's Tell Your Story Together.</h2>
-              <p class="contact-description">
-                Ready to launch your book, coordinate an ARC campaign, or collaborate? Reach out directly and let's craft a campaign tailored to your unique voice.
-              </p>
-              
+            <span class="section-tagline gold-text">Get in Touch</span>
+            <h2 class="font-serif contact-title">Let's Tell Your Story Together.</h2>
+            <p class="contact-description">
+              Ready to launch your book, coordinate an ARC campaign, or collaborate? Subscribe to our newsletter constellation below for future ARC alerts, or reach out directly to start a campaign.
+            </p>
+            
+            <!-- Integrated Newsletter Subscribe Form -->
+            <form id="contact-newsletter-form" class="contact-newsletter-form" data-netlify="true" name="newsletter" netlify>
+              <div class="newsletter-input-wrap">
+                <input type="email" name="email" required placeholder="Enter your email for ARC alerts & updates..." aria-label="Email address" class="newsletter-email-input" />
+                <button type="submit" class="cta-button primary-cta button-magnetic">Subscribe</button>
+              </div>
+              <div id="contact-newsletter-status" class="newsletter-status" style="display: none; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 500;"></div>
+            </form>
+
+            <!-- Footer Actions & Bio Sign-off -->
+            <div class="contact-footer-row">
               <div class="contact-actions">
                 <a href="mailto:bindingwithbookspr@gmail.com?subject=Campaign Inquiry"
                   class="cta-button primary-cta button-magnetic">Start Campaign</a>
+                <a href="https://instagram.com/spineandsoul_xx" target="_blank"
+                  class="cta-button secondary-cta button-magnetic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; margin-right: 6px; vertical-align: middle;">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                  Visit my Bookstagram
+                </a>
               </div>
               
               <div class="contact-signature-block">
                 <span class="thank-you-txt">Thanks for stopping by!</span>
                 <span class="krisha-signature">Krisha</span>
-              </div>
-            </div>
-
-            <!-- Right Column: Newsletter subscription box -->
-            <div class="newsletter-subscription-box glass-panel">
-              <h3 class="font-serif form-box-title">Join the Constellation</h3>
-              <p class="form-box-desc">Subscribe to stay updated with future book launches, ARC alerts, and literary tips.</p>
-              
-              <form id="contact-newsletter-form" class="contact-newsletter-form" data-netlify="true" name="newsletter">
-                <div class="newsletter-input-wrap">
-                  <input type="email" name="email" required placeholder="Enter your email..." aria-label="Email address" class="newsletter-email-input" />
-                  <button type="submit" class="cta-button primary-cta button-magnetic">Subscribe</button>
-                </div>
-              </form>
-              <div id="contact-newsletter-status" class="newsletter-status" style="display: none; margin-top: 0.5rem; font-size: 0.85rem; font-weight: 500;"></div>
-              
-              <div class="newsletter-footer-row">
-                <div class="newsletter-favorite-links">
-                  <span class="links-label">Connect</span>
-                  <a href="https://instagram.com/spineandsoul_xx" target="_blank" class="instagram-bio-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                    Visit my Bookstagram
-                  </a>
-                </div>
               </div>
             </div>
           </div>
