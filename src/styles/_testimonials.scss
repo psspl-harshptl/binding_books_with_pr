@@ -126,7 +126,6 @@
     gap: 2.5rem;
     width: 100%;
     will-change: transform;
-    padding: 4.5rem 0; // Add padding to keep cards within the visible area of the fade mask
 
     @media (max-width: 1024px) {
       display: flex;
@@ -135,12 +134,10 @@
       gap: 1.5rem;
       width: auto;
       flex-shrink: 0;
-      padding: 0; // Remove padding on mobile horizontal scroll
     }
 
     @media (max-width: 1400px) and (min-width: 1025px) {
       gap: 1.25rem;
-      padding: 4rem 0;
     }
   }
 
@@ -161,6 +158,25 @@
       0 10px 30px rgba(0, 0, 0, 0.04),
       inset 0 1px 0 rgba(255, 255, 255, 0.6);
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
+
+    // Margins to keep first and last cards out of the top/bottom fade mask
+    @media (min-width: 1401px) {
+      &:first-child {
+        margin-top: 4.5rem;
+      }
+      &:last-child {
+        margin-bottom: 4.5rem;
+      }
+    }
+
+    @media (max-width: 1400px) and (min-width: 1025px) {
+      &:first-child {
+        margin-top: 4rem;
+      }
+      &:last-child {
+        margin-bottom: 4rem;
+      }
+    }
 
     @media (max-width: 1024px) {
       min-width: 290px;
