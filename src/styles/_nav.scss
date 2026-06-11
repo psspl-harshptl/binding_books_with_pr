@@ -25,6 +25,31 @@
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--text-dark-1);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .logo-img {
+      height: 38px;
+      width: 38px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid rgba(235, 128, 160, 0.2);
+      box-shadow: 0 2px 8px rgba(168, 61, 90, 0.08);
+      background: #ffffff;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    &:hover .logo-img {
+      transform: scale(1.08) rotate(8deg);
+      border-color: var(--accent-crimson);
+      box-shadow: 0 4px 12px rgba(168, 61, 90, 0.15);
+    }
+
+    .logo-text {
+      display: flex;
+      align-items: center;
+    }
 
     .gold-text {
       color: var(--accent-crimson);
