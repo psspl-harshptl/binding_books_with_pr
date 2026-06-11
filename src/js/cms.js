@@ -222,8 +222,21 @@ function createCMSDOM() {
               <div class="cms-upload-row">
                 <div class="cms-avatar-preview" id="cms-preview-avatar">SJM</div>
                 <div class="cms-upload-actions">
-                  <button type="button" class="cms-btn cms-btn-secondary" id="cms-upload-trigger-btn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Upload Image</button>
-                  <button type="button" class="cms-btn cms-btn-secondary" id="cms-clear-image-btn" style="padding: 0.5rem 1rem; font-size: 0.8rem; color: #c44747; display: none;">Remove</button>
+                  <button type="button" class="cms-btn-upload" id="cms-upload-trigger-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="17 8 12 3 7 8"/>
+                      <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Upload Image
+                  </button>
+                  <button type="button" class="cms-btn-remove" id="cms-clear-image-btn" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                    Remove
+                  </button>
                   <input type="file" id="field-image-input" accept="image/*" style="display: none;">
                   <input type="hidden" id="field-avatar-data" value="">
                 </div>

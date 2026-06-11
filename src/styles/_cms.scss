@@ -459,18 +459,25 @@ body.cms-modal-open {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  background: rgba(250, 248, 245, 0.6);
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  border: 1px dashed var(--glass-border);
+  background: rgba(250, 248, 245, 0.9);
+  padding: 0.8rem 1.1rem;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(168, 61, 90, 0.2); // Soft dashed crimson border
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.01);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+
+  &:hover {
+    border-color: rgba(168, 61, 90, 0.45);
+    background: #ffffff;
+  }
 }
 
 .cms-avatar-preview {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  background: rgba(168, 61, 90, 0.08);
-  border: 1px solid var(--glass-border);
+  background: rgba(168, 61, 90, 0.05);
+  border: 1.5px solid rgba(168, 61, 90, 0.15);
   color: var(--accent-crimson);
   font-weight: 700;
   display: flex;
@@ -479,6 +486,7 @@ body.cms-modal-open {
   font-size: 0.95rem;
   flex-shrink: 0;
   overflow: hidden;
+  box-shadow: 0 4px 10px rgba(168, 61, 90, 0.05);
 
   img {
     width: 100%;
@@ -490,8 +498,66 @@ body.cms-modal-open {
 
 .cms-upload-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
   align-items: center;
+
+  // Premium Custom buttons inside the upload row
+  .cms-btn-upload, .cms-btn-remove {
+    padding: 0.6rem 1.1rem;
+    border-radius: 10px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1.5px solid rgba(168, 61, 90, 0.15);
+    background: #ffffff;
+    color: var(--text-dark-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+
+    svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      fill: none;
+      transition: transform 0.25s ease;
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(168, 61, 90, 0.08);
+      border-color: var(--accent-crimson);
+      color: var(--accent-crimson);
+
+      svg {
+        transform: translateY(-1px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .cms-btn-remove {
+    border-color: rgba(196, 71, 71, 0.18);
+    color: #c44747;
+    background: rgba(196, 71, 71, 0.01);
+
+    &:hover {
+      border-color: #d94343;
+      color: #ffffff;
+      background: #d94343;
+      box-shadow: 0 4px 12px rgba(217, 67, 67, 0.2);
+
+      svg {
+        transform: scale(1.05);
+      }
+    }
+  }
 }
 
 /* Custom Interactive Star Rating selector layout */
