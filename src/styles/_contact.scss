@@ -36,134 +36,97 @@
 
   .contact-details {
     z-index: 1;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.5rem;
+    align-items: start;
+    width: 100%;
 
-    .contact-title {
-      font-size: 2.8rem;
-      line-height: 1.2;
-      color: var(--text-dark-1) !important;
-      margin: 1rem 0 1.5rem;
-
-      @media (max-width: 768px) {
-        font-size: 2.2rem;
-      }
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
 
-    p {
-      color: var(--text-dark-2) !important;
-      font-size: 1.05rem;
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-      max-width: 550px;
-
-      @media (max-width: 768px) {
-        margin-bottom: 1.5rem;
-      }
-    }
-  }
-
-  .contact-methods {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-
-    @media (max-width: 768px) {
-      margin-bottom: 2rem;
-    }
-  }
-
-  .contact-method {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(235, 128, 160, 0.25);
-    border-radius: 12px;
-    cursor: pointer;
-
-    .method-icon {
-      font-size: 1.2rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .method-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-dark-3);
-    }
-
-    .method-val {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-dark-1) !important;
-      margin-top: 0.2rem;
-      word-break: break-all;
-
-      &:hover {
-        color: var(--accent-crimson) !important;
-      }
-    }
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.75);
-      border-color: rgba(235, 128, 160, 0.45);
-    }
-  }
-
-  .contact-actions {
-    display: flex;
-
-    @media (max-width: 480px) {
+    .contact-info-block {
+      display: flex;
       flex-direction: column;
-      gap: 1rem;
+      height: 100%;
 
-      .secondary-cta {
-        margin-left: 0;
+      .contact-title {
+        font-size: 2.8rem;
+        line-height: 1.2;
+        color: var(--text-dark-1) !important;
+        margin: 1rem 0 1.5rem;
+
+        @media (max-width: 768px) {
+          font-size: 2.2rem;
+        }
       }
-    }
-  }
 
-  .contact-visual-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: 200px;
+      .contact-description {
+        color: var(--text-dark-2) !important;
+        font-size: 1.05rem;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+        max-width: 500px;
+        line-height: 1.5;
 
-    @media (max-width: 768px) {
-      display: none;
-    }
+        @media (max-width: 768px) {
+          margin-bottom: 1.5rem;
+        }
+      }
 
-    .closing-book-placeholder {
-      width: 150px;
-      height: 200px;
-      position: relative;
+      .contact-actions {
+        display: flex;
+        margin-bottom: 2rem;
 
-      .glowing-orb {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 120px;
-        height: 120px;
-        background: radial-gradient(circle, rgba(199, 141, 146, 0.45) 0%, rgba(110, 26, 36, 0.15) 50%, transparent 70%);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        animation: pulseOrb 3s infinite ease-in-out;
+        @media (max-width: 480px) {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      .contact-signature-block {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .thank-you-txt {
+          font-size: 0.85rem;
+          color: var(--text-dark-3);
+          font-style: italic;
+          margin-bottom: 0.2rem;
+        }
+
+        .krisha-signature {
+          font-family: 'Alex Brush', cursive;
+          font-size: 2.8rem;
+          color: var(--accent-crimson);
+          line-height: 1;
+          margin-top: -0.1rem;
+          transform: rotate(-2deg);
+          display: inline-block;
+        }
       }
     }
   }
 
   .newsletter-subscription-box {
-    margin-top: 1rem;
-    margin-bottom: 2.5rem;
+    margin: 0;
     padding: 2.2rem;
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid rgba(235, 128, 160, 0.2);
     border-radius: 18px;
-    max-width: 550px;
+    width: 100%;
+    max-width: 500px;
     box-sizing: border-box;
+    justify-self: end;
+
+    @media (max-width: 1024px) {
+      justify-self: start;
+      max-width: 550px;
+    }
 
     .form-box-title {
       font-size: 1.5rem;
@@ -212,6 +175,8 @@
       button {
         padding: 0.8rem 1.6rem;
         font-size: 0.9rem;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
     }
 
