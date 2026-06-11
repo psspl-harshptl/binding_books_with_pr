@@ -41,7 +41,6 @@
     }
 
     &:hover .logo-img {
-      transform: scale(1.08) rotate(8deg);
       border-color: var(--accent-crimson);
       box-shadow: 0 4px 12px rgba(168, 61, 90, 0.15);
     }
@@ -49,10 +48,19 @@
     .logo-text {
       display: flex;
       align-items: center;
+      gap: 2px;
+
+      span:nth-child(2) {
+        margin-top: -2px;
+      }
     }
 
     .gold-text {
       color: var(--accent-crimson);
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 

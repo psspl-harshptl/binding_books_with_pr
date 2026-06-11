@@ -29,4 +29,35 @@ export function initMobileMenu() {
       if (state.lenis) state.lenis.start();
     });
   });
+
+  // Initialize smooth scrolling for all anchor links
+  initSmoothScrolling();
 }
+
+function initSmoothScrolling() {
+  const scrollLinks = document.querySelectorAll('a[href^="#"]');
+
+  scrollLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId === '#') return; // Ignore bare hashes
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // Smoothly scroll to the target element
+        if (state.lenis) {
+          state.lenis.scrollTo(targetElement, {
+            offset: 0,
+            duration: 1.5
+          });
+        } else {
+          // Fallback if Lenis is not available
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+}
+
