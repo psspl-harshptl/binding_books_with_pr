@@ -50,7 +50,8 @@ function initSmoothScrolling() {
         if (state.lenis) {
           state.lenis.scrollTo(targetElement, {
             offset: 0,
-            duration: 1.5
+            duration: 2.5,
+            easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 // Smooth cubic ease-in-out
           });
         } else {
           // Fallback if Lenis is not available
