@@ -13,6 +13,7 @@ import { initBackToTop } from './js/backToTop.js';
 import { initScrollTriggers } from './js/scrollTriggers.js';
 import { updateSectionMarkers } from './js/sectionMarkers.js';
 import { initCMS } from './js/cms.js';
+import { initNewsletter } from './js/newsletter.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   initCMS();
@@ -24,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initAboutSectionInteractions();
   initPathwayInteractions();
   initBackToTop();
+  initNewsletter();
 
   // Initialize WebGL subsystem
   state.webglInstance = initThreeScene();
