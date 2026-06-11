@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Netlify Dev Server Configuration
+[dev]
+  command = "npm run dev"
+  targetPort = 3000
+  port = 3003
+
 # Functions directory
 [functions]
   directory = "netlify/functions"
@@ -12,6 +18,11 @@
 
 # ── API Route Rewrites → Netlify Functions ───────────────────────────────────
 # Must be declared BEFORE the SPA catch-all
+
+[[redirects]]
+  from   = "/api/subscribe"
+  to     = "/.netlify/functions/subscribe"
+  status = 200
 
 [[redirects]]
   from   = "/api/login"

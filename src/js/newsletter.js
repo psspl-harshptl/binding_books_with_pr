@@ -13,27 +13,24 @@ export function initNewsletter() {
     status.textContent = 'Subscribing...';
 
     const formData = new FormData(form);
-    const body = new URLSearchParams(formData);
-    body.append('form-name', 'newsletter');
+    const email = formData.get('email');
+    const honeypot = formData.get('bwb_honeypot') || '';
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, bwb_honeypot: honeypot })
       });
 
-      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const data = await response.json().catch(() => ({}));
 
-      if (response.ok || (isLocal && (response.status === 404 || response.status === 405))) {
+      if (response.ok && data.success) {
         status.style.color = '#2d7c43'; // Soft elegant green
         status.textContent = 'Thank you for subscribing! Welcome to our constellation. ✨';
         form.reset();
-        if (isLocal) {
-          console.info('Netlify Forms submission intercepted and mocked as success on localhost.');
-        }
       } else {
-        throw new Error(`Network response not ok: ${response.status}`);
+        throw new Error(data.message || `Network response not ok: ${response.status}`);
       }
     } catch (err) {
       status.style.color = '#c44747'; // Crimson red

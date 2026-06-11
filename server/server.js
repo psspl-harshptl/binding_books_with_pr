@@ -166,6 +166,32 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // 2b. POST Subscribe (Public)
+  if (pathname === '/api/subscribe' && req.method === 'POST') {
+    try {
+      const body = await getRequestBody(req);
+      const email = body.email || '';
+      const honeypot = body.bwb_honeypot || '';
+
+      if (honeypot) {
+        console.warn(`[Local Sub] Honeypot triggered by spam bot. Simulating success.`);
+        sendJSON(res, 200, { success: true });
+        return;
+      }
+
+      if (!email || !email.includes('@')) {
+        sendJSON(res, 400, { success: false, message: 'A valid email address is required.' });
+        return;
+      }
+
+      console.info(`[Local Sub] New subscriber simulated: ${email}`);
+      sendJSON(res, 200, { success: true });
+    } catch (e) {
+      sendJSON(res, 400, { success: false, message: 'Invalid JSON request payload' });
+    }
+    return;
+  }
+
   // Check auth for all other /api routes
   if (pathname.startsWith('/api') && !isAuthorized(req)) {
     sendJSON(res, 401, { success: false, message: 'Unauthorized. Admin authorization required.' });
