@@ -3,8 +3,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { state } from './globals.js';
 
 export function initAboutSectionInteractions() {
-  const path    = document.getElementById('timeline-scroll-path');
-  const steps   = document.querySelectorAll('.timeline-step');
+  const path = document.getElementById('timeline-scroll-path');
+  const steps = document.querySelectorAll('.timeline-step');
   const aboutEl = document.getElementById('about');
   if (!steps.length || !aboutEl) return;
 
@@ -13,7 +13,7 @@ export function initAboutSectionInteractions() {
   // Desktop/Tablet (> 768px) sticky behavior
   mm.add("(min-width: 769px)", () => {
     const SCROLL_PER_STEP = 350;
-    const totalScroll     = steps.length * SCROLL_PER_STEP;
+    const totalScroll = steps.length * SCROLL_PER_STEP;
     aboutEl.style.height = `calc(100vh + ${totalScroll}px)`;
 
     let pLen = 0;
@@ -23,22 +23,22 @@ export function initAboutSectionInteractions() {
       path.style.strokeDashoffset = `${pLen}px`;
     }
 
-    const SPREAD_END   = 0.80;
+    const SPREAD_END = 0.80;
     const stepThresholds = Array.from(steps).map((_, i) =>
       steps.length > 1 ? (i / (steps.length - 1)) * SPREAD_END : 0
     );
 
     function update() {
-      const rect       = aboutEl.getBoundingClientRect();
+      const rect = aboutEl.getBoundingClientRect();
       const scrolledIn = -rect.top;
 
       if (scrolledIn < 0) {
         steps.forEach((step, i) => {
           if (i === 0) {
-            step.style.opacity   = '1';
+            step.style.opacity = '1';
             step.style.transform = 'translateY(0)';
           } else {
-            step.style.opacity   = '0';
+            step.style.opacity = '0';
             step.style.transform = 'translateY(45px)';
           }
         });
@@ -54,7 +54,7 @@ export function initAboutSectionInteractions() {
 
       steps.forEach((step, i) => {
         if (i === 0) {
-          step.style.opacity   = '1';
+          step.style.opacity = '1';
           step.style.transform = 'translateY(0)';
           return;
         }
@@ -62,14 +62,14 @@ export function initAboutSectionInteractions() {
         if (progress >= stepThresholds[i]) {
           if (step.style.opacity !== '1') {
             step.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-            step.style.opacity    = '1';
-            step.style.transform  = 'translateY(0)';
+            step.style.opacity = '1';
+            step.style.transform = 'translateY(0)';
           }
         } else {
           if (step.style.opacity !== '0') {
             step.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-            step.style.opacity    = '0';
-            step.style.transform  = 'translateY(45px)';
+            step.style.opacity = '0';
+            step.style.transform = 'translateY(45px)';
           }
         }
       });
@@ -94,6 +94,7 @@ export function initAboutSectionInteractions() {
         step.style.opacity = '';
         step.style.transform = '';
         step.style.transition = '';
+        step.classList.remove('active-step');
       });
     };
   });
@@ -128,30 +129,49 @@ export function initAboutSectionInteractions() {
       });
     }
 
-    // Highlight timeline nodes/steps as they cross center of viewport
-    steps.forEach((step, index) => {
-      ScrollTrigger.create({
-        trigger: step,
-        start: 'top 60%',
-        end: 'bottom 60%',
-        onEnter: () => {
-          steps.forEach(s => s.classList.remove('active-step'));
-          step.classList.add('active-step');
-          if (state.webglInstance && state.webglInstance.highlightTimelineNode) {
-            state.webglInstance.highlightTimelineNode(index);
-          }
-        },
-        onEnterBack: () => {
-          steps.forEach(s => s.classList.remove('active-step'));
-          step.classList.add('active-step');
-          if (state.webglInstance && state.webglInstance.highlightTimelineNode) {
-            state.webglInstance.highlightTimelineNode(index);
-          }
+    // Scrollbar-driven active steps highlighting
+    function updateMobileActiveStep() {
+      const viewportActiveLine = window.innerHeight * 0.6; // 60% of viewport height
+      let activeIndex = -1;
+
+      // Find the last step that has crossed the 60% line of the viewport
+      steps.forEach((step, index) => {
+        const rect = step.getBoundingClientRect();
+        if (rect.top <= viewportActiveLine) {
+          activeIndex = index;
         }
       });
-    });
+
+      // If we scroll past the bottom of the timeline steps container, deactivate
+      if (timelineStepsContainer) {
+        const timelineRect = timelineStepsContainer.getBoundingClientRect();
+        if (timelineRect.bottom < viewportActiveLine) {
+          activeIndex = -1;
+        }
+      }
+
+      steps.forEach((step, index) => {
+        if (index === activeIndex) {
+          step.classList.add('active-step');
+        } else {
+          step.classList.remove('active-step');
+        }
+      });
+
+      if (state.webglInstance && state.webglInstance.highlightTimelineNode) {
+        state.webglInstance.highlightTimelineNode(activeIndex);
+      }
+    }
+
+    if (state.lenis) state.lenis.on('scroll', updateMobileActiveStep);
+    window.addEventListener('scroll', updateMobileActiveStep, { passive: true });
+    
+    // Initial call to ensure correct state on load
+    setTimeout(updateMobileActiveStep, 100);
 
     return () => {
+      if (state.lenis) state.lenis.off('scroll', updateMobileActiveStep);
+      window.removeEventListener('scroll', updateMobileActiveStep);
       aboutEl.style.height = '';
       steps.forEach(step => {
         step.style.opacity = '';
@@ -170,9 +190,9 @@ export function initAboutSectionInteractions() {
   steps.forEach(step => {
     step.addEventListener('mousemove', e => {
       if (window.innerWidth <= 768) return;
-      const r  = step.getBoundingClientRect();
-      const rx = ((r.height / 2 - (e.clientY - r.top))  / (r.height / 2)) * 7;
-      const ry = (((e.clientX - r.left) - r.width / 2)  / (r.width  / 2)) * -7;
+      const r = step.getBoundingClientRect();
+      const rx = ((r.height / 2 - (e.clientY - r.top)) / (r.height / 2)) * 7;
+      const ry = (((e.clientX - r.left) - r.width / 2) / (r.width / 2)) * -7;
       gsap.to(step, { rotateX: rx, rotateY: ry, transformPerspective: 1000, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
     });
     step.addEventListener('mouseleave', () => {
@@ -183,3 +203,4 @@ export function initAboutSectionInteractions() {
     });
   });
 }
+

@@ -39,3 +39,10 @@ Thumbs.db
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Netlify local cache
+.netlify/
+
+# Local dev server data — production data lives in Netlify Blobs, not the repo.
+# Run `npm run server` to auto-generate this from defaults on first start.
+server/data.json

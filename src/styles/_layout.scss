@@ -112,4 +112,8 @@
     border-color: var(--glass-border-hover);
     box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
+
+  @media(max-width: 576.98px) {
+    box-shadow: none;
+  }
 }

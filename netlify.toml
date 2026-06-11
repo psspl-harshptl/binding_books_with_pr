@@ -1,0 +1,35 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Functions directory
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# ── API Route Rewrites → Netlify Functions ───────────────────────────────────
+# Must be declared BEFORE the SPA catch-all
+
+[[redirects]]
+  from   = "/api/login"
+  to     = "/.netlify/functions/login"
+  status = 200
+
+[[redirects]]
+  from   = "/api/testimonials/reset"
+  to     = "/.netlify/functions/reset"
+  status = 200
+
+[[redirects]]
+  from   = "/api/testimonials"
+  to     = "/.netlify/functions/testimonials"
+  status = 200
+
+# ── SPA catch-all: send everything else to index.html ───────────────────────
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

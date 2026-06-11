@@ -12,8 +12,10 @@ import { initPathwayInteractions } from './js/pathways.js';
 import { initBackToTop } from './js/backToTop.js';
 import { initScrollTriggers } from './js/scrollTriggers.js';
 import { updateSectionMarkers } from './js/sectionMarkers.js';
+import { initCMS } from './js/cms.js';
 
 window.addEventListener('DOMContentLoaded', () => {
+  initCMS();
   initLenis();
   initCursor();
   initMobileMenu();
