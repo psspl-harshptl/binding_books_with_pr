@@ -10,23 +10,21 @@
   }
 
   .contact-card {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    gap: 3.5rem;
+    display: flex;
+    flex-direction: column;
     padding: 4.5rem;
     position: relative;
     overflow: hidden;
     width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
 
     @media (max-width: 1024px) {
-      grid-template-columns: 1fr;
-      padding: 3rem 2.5rem;
-      gap: 2.5rem;
+      padding: 3.5rem 3rem;
     }
 
     @media (max-width: 768px) {
-      padding: 1.5rem 1.25rem;
-      gap: 2rem;
+      padding: 2.5rem 1.5rem;
     }
 
     .contact-glow {
@@ -45,7 +43,7 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 100%;
 
     .contact-title {
       font-size: 2.8rem;
@@ -63,16 +61,12 @@
       font-size: 1.05rem;
       font-weight: 300;
       margin-bottom: 1rem;
-      max-width: 650px;
-      line-height: 1.5;
-
-      @media (max-width: 768px) {
-        margin-bottom: 1rem;
-      }
+      max-width: 750px;
+      line-height: 1.6;
     }
 
     .contact-newsletter-form {
-      margin: 1.5rem 0 2.5rem;
+      margin: 1.5rem 0 2rem;
       max-width: 550px;
       width: 100%;
 
@@ -87,7 +81,7 @@
 
         .newsletter-email-input {
           flex: 1;
-          padding: 0.8rem 1.2rem;
+          padding: 0.85rem 1.2rem;
           border-radius: 12px;
           border: 1.5px solid rgba(235, 128, 160, 0.25);
           background: #ffffff;
@@ -108,10 +102,82 @@
         }
 
         button {
-          padding: 0.8rem 1.6rem;
+          padding: 0.85rem 1.6rem;
           font-size: 0.9rem;
           white-space: nowrap;
           flex-shrink: 0;
+        }
+      }
+    }
+
+    .active-campaigns-section {
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      border-top: 1px dashed rgba(168, 61, 90, 0.15);
+      padding-top: 2rem;
+      width: 100%;
+
+      .campaigns-section-title {
+        font-size: 1.25rem;
+        color: var(--text-dark-1);
+        margin-bottom: 1.25rem;
+        letter-spacing: 0.03em;
+      }
+
+      .campaign-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1.5px solid rgba(234, 226, 213, 0.5);
+        border-radius: 14px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1rem;
+        gap: 1.5rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.65);
+          border-color: var(--accent-crimson);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(168, 61, 90, 0.06);
+        }
+
+        @media (max-width: 580px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+
+          .cta-button {
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+        .campaign-info {
+          flex: 1;
+
+          h5 {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.05rem;
+            color: var(--accent-crimson);
+            margin: 0 0 0.4rem 0;
+            letter-spacing: 0.02em;
+          }
+          p {
+            font-size: 0.85rem;
+            color: var(--text-dark-2);
+            margin: 0;
+            line-height: 1.5;
+          }
+        }
+
+        .cta-button {
+          padding: 0.65rem 1.3rem;
+          font-size: 0.8rem;
+          white-space: nowrap;
         }
       }
     }
@@ -124,7 +190,6 @@
       padding-top: 2rem;
       border-top: 1px dashed rgba(235, 128, 160, 0.2);
       width: 100%;
-      max-width: 650px;
       flex-wrap: wrap;
       gap: 1.5rem;
 
@@ -154,6 +219,7 @@
       .contact-signature-block {
         display: flex;
         flex-direction: column;
+        gap: 8px;
         align-items: flex-end;
         text-align: right;
 
@@ -181,52 +247,5 @@
         }
       }
     }
-  }
-
-  .contact-visual-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: 200px;
-    align-self: center;
-
-    @media (max-width: 1024px) {
-      display: none;
-    }
-
-    .closing-book-placeholder {
-      width: 150px;
-      height: 200px;
-      position: relative;
-
-      .glowing-orb {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 120px;
-        height: 120px;
-        background: radial-gradient(circle, rgba(199, 141, 146, 0.45) 0%, rgba(110, 26, 36, 0.15) 50%, transparent 70%);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        animation: pulseOrb 3s infinite ease-in-out;
-      }
-    }
-  }
-
-}
-
-@keyframes pulseOrb {
-
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
-    filter: blur(10px);
   }
 }
